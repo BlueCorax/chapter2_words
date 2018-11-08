@@ -6,6 +6,7 @@
 
 class Word{
 	std::string string;
+	int cmp(Word const other) const;
 
 public:
 	Word();
@@ -14,14 +15,12 @@ public:
 	std::istream & read(std::istream &in);
 	std::ostream & print(std::ostream &out) const;
 
-	int cmp(Word const other) const ;
-
-	bool operator>(Word const other);
-	bool operator<(Word const other);
-	bool operator>=(Word const other);
-	bool operator<=(Word const other);
-	bool operator==(Word const other);
-	bool operator!=(Word const other);
+	bool operator>(Word const other) const;
+	bool operator<(Word const other) const;
+	bool operator>=(Word const other) const;
+	bool operator<=(Word const other) const;
+	bool operator==(Word const other) const;
+	bool operator!=(Word const other) const;
 
 	inline std::string toString() const{
 		return string;

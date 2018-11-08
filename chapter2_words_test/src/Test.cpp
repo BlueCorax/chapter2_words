@@ -3,6 +3,7 @@
 #include "xml_listener.h"
 #include "cute_runner.h"
 #include "src/word.h"
+#include "word_tests.h"
 
 
 //operator tests
@@ -123,8 +124,6 @@ void test_opIN_invalid(){
 
 }
 
-
-
 bool runAllTests(int argc, char const *argv[]) {
 	cute::suite s { };
 	//operator tests
@@ -159,6 +158,7 @@ bool runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_opIN_valid));
 	s.push_back(CUTE(test_opIN_invalid));
 
+	push_back_AllTests(s);
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<>> lis(xmlfile.out);
 	auto runner = cute::makeRunner(lis, argc, argv);

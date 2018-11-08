@@ -48,22 +48,22 @@ int Word::cmp(Word const other) const {
 	});
 }
 
-bool Word::operator>(Word const other) {
+bool Word::operator>(Word const other) const {
 	return Word::cmp(other) > 0;
 }
-bool Word::operator<(Word const other) {
+bool Word::operator<(Word const other) const {
 	return Word::cmp(other) < 0;
 }
-bool Word::operator>=(Word const other) {
+bool Word::operator>=(Word const other) const {
 	return Word::cmp(other) >= 0;
 }
-bool Word::operator<=(Word const other) {
+bool Word::operator<=(Word const other) const {
 	return Word::cmp(other) <= 0;
 }
-bool Word::operator==(Word const other) {
+bool Word::operator==(Word const other) const {
 	return Word::cmp(other) == 0;
 }
-bool Word::operator!=(Word const other) {
+bool Word::operator!=(Word const other) const {
 	return Word::cmp(other) != 0;
 }
 
