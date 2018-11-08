@@ -11,10 +11,10 @@ public:
 	Word();
 	explicit Word(std::string word);
 
-	std::istream & Word::read(std::istream &in);
-	std::ostream & Word::print(std::ostream &out) const;
+	std::istream & read(std::istream &in);
+	std::ostream & print(std::ostream &out) const;
 
-	int Word::cmp(Word const other) const ;
+	int cmp(Word const other) const ;
 
 	bool operator>(Word const other);
 	bool operator<(Word const other);
@@ -28,7 +28,7 @@ public:
 	}
 };
 
-std::istream&& operator>>(std::istream &in, Word &word);
+std::istream & operator>>(std::istream &in, Word &word);
 std::ostream & operator<<(std::ostream &out, Word const word);
 
 #endif

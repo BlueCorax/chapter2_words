@@ -19,7 +19,7 @@ Word::Word(std::string word) {
 std::istream & Word::read(std::istream &stream) {
 	std::ostringstream ss { };
 
-	char const c = stream.peek();
+	char c = stream.peek();
 	while (stream.good() && !std::isalpha(c)) { //skip non letters
 		stream.ignore();
 		c = stream.peek();
