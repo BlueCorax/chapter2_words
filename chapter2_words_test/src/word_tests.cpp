@@ -2,6 +2,10 @@
 #include "cute.h"
 #include "src/word.h"
 
+
+#include <string>
+#include <stdexcept>
+
 void test_cannot_create_empty_word() {
 	ASSERT_THROWS(Word { "" }, std::invalid_argument);
 }

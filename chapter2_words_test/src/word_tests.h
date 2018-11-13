@@ -2,8 +2,6 @@
 #define SRC_WORD_TESTS_H_
 
 #include "cute.h"
-#include "src/word.h"
-
 
 void test_cannot_create_empty_word();
 
