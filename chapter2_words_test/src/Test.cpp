@@ -69,38 +69,64 @@ void test_opGTE_gt(){
 }
 
 void test_opLTE_lt(){
-
+	word::Word w1{"abC"};
+	word::Word w2("def");
+	ASSERT(w1 <= w2);
 }
 
 void test_opLTE_eq(){
+	word::Word w1{"abC"};
+	word::Word w2("abc");
+	ASSERT(w1 <= w2);
 
 }
 
 void test_opLTE_gt(){
+	word::Word w1{"def"};
+	word::Word w2("ABC");
+	ASSERT(!(w1 <= w2));
 
 }
 
 void test_opEQ_lt(){
+	word::Word w1{"abC"};
+	word::Word w2("def");
+	ASSERT(!(w1 == w2));
 
 }
 
 void test_opEQ_eq(){
+	word::Word w1{"abC"};
+	word::Word w2("abc");
+	ASSERT(w1 == w2);
 
 }
 
 void test_opEQ_gt(){
+	word::Word w1{"def"};
+	word::Word w2("ABC");
+	ASSERT(!(w1 == w2));
 
 }
 
 void test_opNEQ_lt(){
+	word::Word w1{"abC"};
+	word::Word w2("def");
+	ASSERT(w1 != w2);
 
 }
 
 void test_opNEQ_eq(){
+	word::Word w1{"abC"};
+	word::Word w2("abc");
+	ASSERT(!(w1 != w2));
 
 }
 
 void test_opNEQ_gt(){
+	word::Word w1{"def"};
+	word::Word w2("ABC");
+	ASSERT(w1 != w2);
 
 }
 

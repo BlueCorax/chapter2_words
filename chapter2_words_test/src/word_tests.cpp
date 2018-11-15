@@ -2,29 +2,29 @@
 #include "cute.h"
 #include "src/word.h"
 
-
+#include <sstream>
 #include <string>
 #include <stdexcept>
 
 using namespace word;
 
-void test_cannot_create_empty_word() {
+void test_cannot_create_empty_word() { // @suppress("Unregistered Test Marker")
 	ASSERT_THROWS(Word { "" }, std::invalid_argument);
 }
 
-void test_cannot_create_word_with_space() {
+void test_cannot_create_word_with_space() { // @suppress("Unregistered Test Marker")
 	ASSERT_THROWS(Word { "abc xyz" }, std::invalid_argument);
 }
 
-void test_cannot_create_word_with_number() {
+void test_cannot_create_word_with_number() { // @suppress("Unregistered Test Marker")
 	ASSERT_THROWS(Word { "abc3xyz" }, std::invalid_argument);
 }
 
-void test_cannot_create_word_with_punctuation() {
+void test_cannot_create_word_with_punctuation() { // @suppress("Unregistered Test Marker")
 	ASSERT_THROWS(Word { "abc.xyz" }, std::invalid_argument);
 }
 
-void test_output_operator() {
+void test_output_operator() { // @suppress("Unregistered Test Marker")
 	std::string const expected { "Python" };
 	Word const w { expected };
 	std::ostringstream output { };
@@ -32,113 +32,113 @@ void test_output_operator() {
 	ASSERT_EQUAL(expected, output.str());
 }
 
-void test_same_words_are_equal() {
+void test_same_words_are_equal() { // @suppress("Unregistered Test Marker")
 	ASSERT_EQUAL(Word { "Ruby" }, Word { "Ruby" });
 }
 
-void test_different_words_are_not_equal() {
+void test_different_words_are_not_equal() { // @suppress("Unregistered Test Marker")
 	ASSERT_NOT_EQUAL_TO(Word{"Haskell"}, Word{"ML"});
 }
 
-void test_same_word_with_different_cases_are_equal() {
+void test_same_word_with_different_cases_are_equal() { // @suppress("Unregistered Test Marker")
 	ASSERT_EQUAL(Word { "BASIC" }, Word { "basic" });
 }
 
-void test_same_word_is_not_lower_than() {
+void test_same_word_is_not_lower_than() { // @suppress("Unregistered Test Marker")
 	ASSERT(!(Word { "Erlang" } < Word { "Erlang" }));
 }
 
-void test_smaller_word_is_smaller() {
+void test_smaller_word_is_smaller() { // @suppress("Unregistered Test Marker")
 	ASSERT_LESS(Word { "Erlang" }, Word { "Fortran" });
 }
 
-void test_smaller_word_with_capital_letters_is_smaller() {
+void test_smaller_word_with_capital_letters_is_smaller() { // @suppress("Unregistered Test Marker")
 	ASSERT_LESS(Word { "ADA" }, Word { "java" });
 }
 
-void test_same_word_with_different_cases_are_not_smaller() {
+void test_same_word_with_different_cases_are_not_smaller() { // @suppress("Unregistered Test Marker")
 	ASSERT(!(Word {"Groovy"} < Word {"groovy"}));
 }
 
-void test_greater_word_is_greater() {
+void test_greater_word_is_greater() { // @suppress("Unregistered Test Marker")
 	ASSERT_GREATER(Word { "Rust" }, Word { "Prolog" });
 }
 
-void test_greater_word_with_capital_letters_is_greater() {
+void test_greater_word_with_capital_letters_is_greater() { // @suppress("Unregistered Test Marker")
 	ASSERT_GREATER(Word { "Lisp" }, Word { "brainfuck" });
 }
 
-void test_smaller_word_is_less_equal() {
+void test_smaller_word_is_less_equal() { // @suppress("Unregistered Test Marker")
 	ASSERT_LESS_EQUAL(Word { "Algol" }, Word { "BCPL" });
 }
 
-void test_same_word_is_less_equal() {
+void test_same_word_is_less_equal() { // @suppress("Unregistered Test Marker")
 	ASSERT_LESS_EQUAL(Word { "Assembler" }, Word { "Assembler" });
 }
 
-void test_greater_word_is_greater_equal() {
+void test_greater_word_is_greater_equal() { // @suppress("Unregistered Test Marker")
 	ASSERT_GREATER_EQUAL(Word { "RPG" }, Word { "Perl" });
 }
 
-void test_same_word_is_greater_equal() {
+void test_same_word_is_greater_equal() { // @suppress("Unregistered Test Marker")
 	ASSERT_GREATER_EQUAL(Word { "Scala" }, Word { "Scala" });
 }
 
-void test_input_operator_single_word() {
+void test_input_operator_single_word() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"Elixir"};
 	Word w{};
 	input >> w;
 	ASSERT_EQUAL(Word{"Elixir"}, w);
 }
 
-void test_input_operator_single_word_stream_good() {
+void test_input_operator_single_word_stream_good() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"Cobol"};
 	Word w{};
 	ASSERT(input >> w);
 }
 
-void test_input_operator_called_once_first_word() {
+void test_input_operator_called_once_first_word() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"Ceylon Go"};
 	Word w{};
 	input >> w;
 	ASSERT_EQUAL(Word{"Ceylon"}, w);
 }
 
-void test_input_operator_called_once_stream_good() {
+void test_input_operator_called_once_stream_good() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"Lua Oberon"};
 	Word w{};
 	ASSERT(input >> w);
 }
 
-void test_input_operator_on_empty_stream_fail() {
+void test_input_operator_on_empty_stream_fail() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{};
 	Word w{};
 	input >> w;
 	ASSERT(input.fail());
 }
 
-void test_input_operator_on_stream_without_word() {
+void test_input_operator_on_stream_without_word() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"1337"};
 	Word w{};
 	input >> w;
 	ASSERT(input.fail());
 }
 
-void test_input_operator_on_empty_stream_word_unchanged() {
+void test_input_operator_on_empty_stream_word_unchanged() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{};
 	Word w{"Eiffel"};
 	input >> w;
 	ASSERT_EQUAL(Word{"Eiffel"}, w);
 }
 
-void test_input_operator_stops_on_slash() {
+void test_input_operator_stops_on_slash() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"PL/SQL"};
 	Word w{};
 	input >> w;
 	ASSERT_EQUAL(Word{"PL"}, w);
 }
 
-void test_input_operator_stops_at_end_of_word() {
+void test_input_operator_stops_at_end_of_word() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"VB6"};
 	Word w{};
 	int i{};
@@ -146,21 +146,21 @@ void test_input_operator_stops_at_end_of_word() {
 	ASSERT_EQUAL(6, i);
 }
 
-void test_input_operator_skips_leading_non_alpha() {
+void test_input_operator_skips_leading_non_alpha() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"3switchBF"};
 	Word w{};
 	input >> w;
 	ASSERT_EQUAL(Word{"switchBF"}, w);
 }
 
-void test_input_operator_overwrites_word() {
+void test_input_operator_overwrites_word() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"Kotlin"};
 	Word w{"JavaScript"};
 	input >> w;
 	ASSERT_EQUAL(Word{"Kotlin"}, w);
 }
 
-void test_exercise_example() {
+void test_exercise_example() { // @suppress("Unregistered Test Marker")
 	std::istringstream input{"compl33tely ~ weird !!??!! 4matted in_put"};
 	Word w{};
 	input >> w;
