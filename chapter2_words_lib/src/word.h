@@ -29,9 +29,9 @@ namespace word {
 		}
 	};
 
+	std::istream & operator>>(std::istream &in, word::Word &word);
+	std::ostream & operator<<(std::ostream &out, word::Word const word);
 }
 
-std::istream & operator>>(std::istream &in, word::Word &word);
-std::ostream & operator<<(std::ostream &out, word::Word const word);
 
 #endif

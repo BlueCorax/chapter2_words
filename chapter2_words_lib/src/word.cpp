@@ -8,18 +8,20 @@
 #include <cctype>
 #include <iterator>
 
-word::Word::Word() {
+namespace word {
+
+Word::Word() {
 	string = "default";
 }
 
-word::Word::Word(std::string word) {
+Word::Word(std::string word) {
 	if (word.empty() || !std::all_of(begin(word), end(word), isalpha)) {
 		throw std::invalid_argument { "Is not a fucking word moron" };
 	}
 	string = word;
 }
 
-std::istream & word::Word::read(std::istream &stream) {
+std::istream & Word::read(std::istream &stream) {
 	std::ostringstream ss { };
 
 	char c = stream.peek();
@@ -42,12 +44,12 @@ std::istream & word::Word::read(std::istream &stream) {
 	return stream;
 }
 
-std::ostream & word::Word::print(std::ostream &out) const {
+std::ostream & Word::print(std::ostream &out) const {
 	out << string;
 	return out;
 }
 
-int word::Word::cmp(Word const other) const {
+int Word::cmp(Word const other) const {
 	if (std::equal(begin(string), end(string), begin(other.string), end(other.string), [](char const l, char const r) {
 		return tolower(l) == tolower(r);
 	})) {
@@ -62,29 +64,32 @@ int word::Word::cmp(Word const other) const {
 	}
 }
 
-bool word::Word::operator>(Word const other) const {
+bool Word::operator>(Word const other) const {
 	return Word::cmp(other) > 0;
 }
-bool word::Word::operator<(Word const other) const {
+bool Word::operator<(Word const other) const {
 	return Word::cmp(other) < 0;
 }
-bool word::Word::operator>=(Word const other) const {
+bool Word::operator>=(Word const other) const {
 	return Word::cmp(other) >= 0;
 }
-bool word::Word::operator<=(Word const other) const {
+bool Word::operator<=(Word const other) const {
 	return Word::cmp(other) <= 0;
 }
-bool word::Word::operator==(Word const other) const {
+bool Word::operator==(Word const other) const {
 	return Word::cmp(other) == 0;
 }
-bool word::Word::operator!=(Word const other) const {
+bool Word::operator!=(Word const other) const {
 	return Word::cmp(other) != 0;
 }
 
-std::istream & operator>>(std::istream &in, word::Word &word) {
+std::istream & operator>>(std::istream &in, Word &word) {
 	return word.read(in);
 }
 
-std::ostream & operator<<(std::ostream &out, word::Word const word) {
+std::ostream & operator<<(std::ostream &out, Word const word) {
 	return word.print(out);
 }
+
+}
+
