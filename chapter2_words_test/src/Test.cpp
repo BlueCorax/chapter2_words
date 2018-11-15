@@ -124,6 +124,10 @@ void test_opIN_invalid(){
 
 }
 
+void test_2_3_words(){
+
+}
+
 bool runAllTests(int argc, char const *argv[]) {
 	cute::suite s { };
 	//operator tests

@@ -6,6 +6,8 @@
 #include <string>
 #include <stdexcept>
 
+using namespace word;
+
 void test_cannot_create_empty_word() {
 	ASSERT_THROWS(Word { "" }, std::invalid_argument);
 }

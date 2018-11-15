@@ -4,30 +4,34 @@
 #include <string>
 #include <iosfwd>
 
-class Word{
-	std::string string;
-	int cmp(Word const other) const;
+namespace word {
 
-public:
-	Word();
-	explicit Word(std::string word);
+	class Word {
+		std::string string;
+		int cmp(Word const other) const;
 
-	std::istream & read(std::istream &in);
-	std::ostream & print(std::ostream &out) const;
+	public:
+		Word();
+		explicit Word(std::string word);
 
-	bool operator>(Word const other) const;
-	bool operator<(Word const other) const;
-	bool operator>=(Word const other) const;
-	bool operator<=(Word const other) const;
-	bool operator==(Word const other) const;
-	bool operator!=(Word const other) const;
+		std::istream & read(std::istream &in);
+		std::ostream & print(std::ostream &out) const;
 
-	inline std::string toString() const{
-		return string;
-	}
-};
+		bool operator>(Word const other) const;
+		bool operator<(Word const other) const;
+		bool operator>=(Word const other) const;
+		bool operator<=(Word const other) const;
+		bool operator==(Word const other) const;
+		bool operator!=(Word const other) const;
 
-std::istream & operator>>(std::istream &in, Word &word);
-std::ostream & operator<<(std::ostream &out, Word const word);
+		inline std::string toString() const {
+			return string;
+		}
+	};
+
+}
+
+std::istream & operator>>(std::istream &in, word::Word &word);
+std::ostream & operator<<(std::ostream &out, word::Word const word);
 
 #endif
