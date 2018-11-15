@@ -3,8 +3,10 @@
 #include <sstream>
 
 int main(){
-	std::istringstream in{"one two three\n four five six"};
+	auto input = "one two three\n four five six\n";
+	std::istringstream in{ input };
 	std::ostringstream o{};
+	std::cout << "input: " << input;
 	kwic::kwic(in, o);
 	std::cout << o.str() << '\n';
 }
