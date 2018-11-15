@@ -11,7 +11,6 @@
 using WList = std::vector<word::Word>;
 
 WList parseWords(std::string & line) {
-	word::Word word{};
 	std::stringstream in{line};
 	WList sentence{std::istream_iterator<word::Word>{in}, std::istream_iterator<word::Word>{}};
 	return sentence;
