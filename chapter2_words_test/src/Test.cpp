@@ -3,44 +3,69 @@
 #include "xml_listener.h"
 #include "cute_runner.h"
 #include "src/word.h"
+#include "src/kwic.h"
 #include "word_tests.h"
+
+#include <sstream>
 
 
 //operator tests
 void test_opGT_lt(){
-
+	word::Word w1{"abc"};
+	word::Word w2("def");
+	ASSERT(!(w1 > w2));
 }
 
 void test_opGT_eq(){
+	word::Word w1{"abc"};
+	word::Word w2("abc");
+	ASSERT(!(w1 > w2));
 
 }
 
 void test_opGT_gt(){
+	word::Word w1{"def"};
+	word::Word w2("abc");
+	ASSERT(w1 > w2);
 
 }
 
 void test_opLT_lt(){
+	word::Word w1{"abc"};
+	word::Word w2("def");
+	ASSERT(w1 < w2);
 
 }
 
 void test_opLT_eq(){
+	word::Word w1{"abc"};
+	word::Word w2("abc");
+	ASSERT(!(w1 < w2));
 
 }
 
 void test_opLT_gt(){
-
+	word::Word w1{"def"};
+	word::Word w2("abc");
+	ASSERT(!(w1 < w2));
 }
 
 void test_opGTE_lt(){
-
+	word::Word w1{"abc"};
+	word::Word w2("def");
+	ASSERT(!(w1 >= w2));
 }
 
 void test_opGTE_eq(){
-
+	word::Word w1{"abc"};
+	word::Word w2("abc");
+	ASSERT(w1 >= w2);
 }
 
 void test_opGTE_gt(){
-
+	word::Word w1{"def"};
+	word::Word w2("Abc");
+	ASSERT(w1 >= w2);
 }
 
 void test_opLTE_lt(){
@@ -124,8 +149,17 @@ void test_opIN_invalid(){
 
 }
 
-void test_2_3_words(){
-
+//kwic tests
+void test_2lines_3words(){
+	std::istringstream in{"one two three\n four five six\n"};
+	std::ostringstream out{};
+	kwic::kwic(in, out);
+	ASSERT_EQUAL(	"five six four \n"
+					"four five six \n"
+					"one two three \n"
+					"six four five \n"
+					"three one two \n"
+					"two three one \n", out.str());
 }
 
 bool runAllTests(int argc, char const *argv[]) {
@@ -162,6 +196,8 @@ bool runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_opIN_valid));
 	s.push_back(CUTE(test_opIN_invalid));
 
+	//kwic tests
+	s.push_back(CUTE(test_2lines_3words));
 	push_back_AllTests(s);
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<>> lis(xmlfile.out);
