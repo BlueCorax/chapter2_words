@@ -132,47 +132,79 @@ void test_opNEQ_gt(){
 
 //IO Tests
 void test_print(){
-
+	word::Word word{"HulaHop"};
+	std::ostringstream out{};
+	word.print(out);
+	ASSERT_EQUAL("HulaHop", out.str());
 }
 
 void test_read_once_valid(){
-
+	std::istringstream in{" hall0"};
+	word::Word word{};
+	word.read(in);
+	ASSERT_EQUAL("hall", word.toString());
 }
 
 void test_read_twice_valid(){
-
+	std::istringstream in{"once, twice!"};
+	word::Word w1{}, w2{};
+	w1.read(in);
+	w2.read(in);
+	ASSERT("once" == w1.toString() && "twice" == w2.toString());
 }
 
 void test_read_empty_invalid(){
-
+	std::istringstream in{""};
+	word::Word word{};
+	word.read(in);
+	ASSERT(word.toString() == "default" && in.eof());
 }
 
 void test_read_numeric_invalid(){
-
+	std::istringstream in{"1984"};
+	word::Word word{};
+	word.read(in);
+	ASSERT(word.toString() == "default" && in.eof());
 }
 
 void test_read_twice_numericDelimiter_valid(){
-
-}
-
-void test_read_twice_invalidLetterDelimiter_valid(){
-
+	std::istringstream in{"Time4Tea"};
+	word::Word w1{};
+	word::Word w2{};
+	w1.read(in);
+	w2.read(in);
+	ASSERT("Time" == w1.toString() && "Tea" == w2.toString());
 }
 
 void test_read_four_multipleDelimiters_valid(){
-
+	std::istringstream in{"One 1 tWo 2- thRee 3;!fouR"};
+	word::Word w1{}, w2{}, w3{}, w4{};
+	w1.read(in);
+	w2.read(in);
+	w3.read(in);
+	w4.read(in);
+	ASSERT("One" == w1.toString() && "tWo" == w2.toString() && "thRee" == w3.toString() && "fouR" == w4.toString());
 }
 
 void test_opOUT_valid(){
-
+	word::Word word{"abcdefghijklmnop"};
+	std::ostringstream out{};
+	out << word;
+	ASSERT_EQUAL("abcdefghijklmnop", out.str());
 }
 
 void test_opIN_valid(){
-
+	word::Word word{};
+	std::istringstream in{"--hula--"};
+	in >> word;
+	ASSERT_EQUAL("hula", word.toString());
 }
 
 void test_opIN_invalid(){
-
+	word::Word word{};
+	std::istringstream in{"&2012%"};
+	word.read(in);
+	ASSERT(word.toString() == "default" && in.eof());
 }
 
 //kwic tests
@@ -209,6 +241,7 @@ bool runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_opNEQ_lt));
 	s.push_back(CUTE(test_opNEQ_gt));
 	s.push_back(CUTE(test_opNEQ_eq));
+
 	//IO tests
 	s.push_back(CUTE(test_print));
 	s.push_back(CUTE(test_read_once_valid));
@@ -216,7 +249,6 @@ bool runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_read_empty_invalid));
 	s.push_back(CUTE(test_read_numeric_invalid));
 	s.push_back(CUTE(test_read_twice_numericDelimiter_valid));
-	s.push_back(CUTE(test_read_twice_invalidLetterDelimiter_valid));
 	s.push_back(CUTE(test_read_four_multipleDelimiters_valid));
 	s.push_back(CUTE(test_opOUT_valid));
 	s.push_back(CUTE(test_opIN_valid));

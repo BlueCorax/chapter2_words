@@ -1,5 +1,5 @@
 <testsuites>
-	<testsuite name="AllTests" tests="60">
+	<testsuite name="AllTests" tests="59">
 		<testcase classname="AllTests" name="test_opGT_lt"/>
 		<testcase classname="AllTests" name="test_opGT_gt"/>
 		<testcase classname="AllTests" name="test_opGT_eq"/>
@@ -24,7 +24,6 @@
 		<testcase classname="AllTests" name="test_read_empty_invalid"/>
 		<testcase classname="AllTests" name="test_read_numeric_invalid"/>
 		<testcase classname="AllTests" name="test_read_twice_numericDelimiter_valid"/>
-		<testcase classname="AllTests" name="test_read_twice_invalidLetterDelimiter_valid"/>
 		<testcase classname="AllTests" name="test_read_four_multipleDelimiters_valid"/>
 		<testcase classname="AllTests" name="test_opOUT_valid"/>
 		<testcase classname="AllTests" name="test_opIN_valid"/>

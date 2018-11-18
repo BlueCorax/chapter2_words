@@ -16,7 +16,7 @@ Word::Word() {
 
 Word::Word(std::string word) {
 	if (word.empty() || !std::all_of(begin(word), end(word), isalpha)) {
-		throw std::invalid_argument { "Is not a fucking word moron" };
+		throw std::invalid_argument { "This is not a fucking word moron!" };
 	}
 	string = word;
 }
