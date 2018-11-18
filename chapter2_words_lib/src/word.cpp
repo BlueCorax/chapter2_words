@@ -16,7 +16,7 @@ Word::Word() {
 
 Word::Word(std::string word) {
 	if (word.empty() || !std::all_of(begin(word), end(word), isalpha)) {
-		throw std::invalid_argument { "This is not a fucking word moron!" };
+		throw std::invalid_argument { "This is not a word!" };
 	}
 	string = word;
 }
@@ -50,18 +50,11 @@ std::ostream & Word::print(std::ostream &out) const {
 }
 
 int Word::cmp(Word const other) const {
-	if (std::equal(begin(string), end(string), begin(other.string), end(other.string), [](char const l, char const r) {
-		return tolower(l) == tolower(r);
-	})) {
-		return 0;
-	} else if (std::lexicographical_compare(begin(string), end(string), begin(other.string), end(other.string), [](char const l, char const r) {
-		return tolower(l) < tolower(r);
-	})) {
-		//less
-		return -1;
-	} else {
-		return 1;
-	}
+	std::string own{string};
+	std::string others{other.string};
+	std::transform(own.begin(), own.end(), own.begin(), tolower);
+	std::transform(others.begin(), others.end(), others.begin(), tolower);
+	return own.compare(others);
 }
 
 bool Word::operator>(Word const other) const {
