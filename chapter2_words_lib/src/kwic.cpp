@@ -17,7 +17,7 @@ WList parseWords(std::string & line) {
 }
 
 void kwic::kwic(std::istream & in, std::ostream & out) {
-	std::set<WList> rotationSet { };
+	std::set<WList> rotationSet {};
 	std::string line{};
 	while (std::getline(in, line)) {
 		auto sentence = parseWords(line);

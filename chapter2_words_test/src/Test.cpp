@@ -236,6 +236,33 @@ void test_2lines_3words(){
 					"two three one \n", out.str());
 }
 
+void test_2lines_samewords(){
+	std::istringstream in{"ABC DEF GHI\nDEF GHI ABC\n"};
+	std::ostringstream out{};
+	kwic::kwic(in, out);
+	ASSERT_EQUAL( 	"ABC DEF GHI \n"
+					"DEF GHI ABC \n"
+					"GHI ABC DEF \n", out.str());
+}
+
+void test_identical_lines(){
+	std::istringstream in{"Abc aBc abC\nabC Abc aBc\n"};
+	std::ostringstream out{};
+	kwic::kwic(in, out);
+	ASSERT_EQUAL( 	"Abc aBc abC \n", out.str());
+}
+
+void test_same_words_different_lines(){
+	std::istringstream in{"aaa aaa bbb\nbbb aaa bbb\n"};
+	std::ostringstream out{};
+	kwic::kwic(in, out);
+	ASSERT_EQUAL( 	"aaa aaa bbb \n"
+					"aaa bbb aaa \n"
+					"aaa bbb bbb \n"
+					"bbb aaa aaa \n"
+					"bbb aaa bbb \n"
+					"bbb bbb aaa \n", out.str());
+}
 
 bool runAllTests(int argc, char const *argv[]) {
 	cute::suite s { };
@@ -274,6 +301,9 @@ bool runAllTests(int argc, char const *argv[]) {
 	//kwic tests
 	s.push_back(CUTE(test_1line_10words));
 	s.push_back(CUTE(test_2lines_3words));
+	s.push_back(CUTE(test_2lines_samewords));
+	s.push_back(CUTE(test_identical_lines));
+	s.push_back(CUTE(test_same_words_different_lines));
 	push_back_AllTests(s);
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<>> lis(xmlfile.out);

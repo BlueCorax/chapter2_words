@@ -1,5 +1,5 @@
 <testsuites>
-	<testsuite name="AllTests" tests="60">
+	<testsuite name="AllTests" tests="63">
 		<testcase classname="AllTests" name="test_opGT_lt"/>
 		<testcase classname="AllTests" name="test_opGT_gt"/>
 		<testcase classname="AllTests" name="test_opGT_eq"/>
@@ -30,6 +30,9 @@
 		<testcase classname="AllTests" name="test_opIN_invalid"/>
 		<testcase classname="AllTests" name="test_1line_10words"/>
 		<testcase classname="AllTests" name="test_2lines_3words"/>
+		<testcase classname="AllTests" name="test_2lines_samewords"/>
+		<testcase classname="AllTests" name="test_identical_lines"/>
+		<testcase classname="AllTests" name="test_same_words_different_lines"/>
 		<testcase classname="AllTests" name="test_cannot_create_empty_word"/>
 		<testcase classname="AllTests" name="test_cannot_create_word_with_space"/>
 		<testcase classname="AllTests" name="test_cannot_create_word_with_number"/>
