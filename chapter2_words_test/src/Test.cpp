@@ -264,6 +264,20 @@ void test_same_words_different_lines(){
 					"bbb bbb aaa \n", out.str());
 }
 
+void test_empty(){
+std::istringstream in{};
+std::ostringstream out{};
+kwic::kwic(in, out);
+ASSERT_EQUAL("", out.str());
+}
+
+void test_no_words(){
+std::istringstream in{"23./66 &&& *\n"};
+std::ostringstream out{};
+kwic::kwic(in, out);
+ASSERT_EQUAL("", out.str());
+}
+
 bool runAllTests(int argc, char const *argv[]) {
 	cute::suite s { };
 	//operator tests
@@ -304,6 +318,8 @@ bool runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_2lines_samewords));
 	s.push_back(CUTE(test_identical_lines));
 	s.push_back(CUTE(test_same_words_different_lines));
+	s.push_back(CUTE(test_empty));
+	s.push_back(CUTE(test_no_words));
 	push_back_AllTests(s);
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<>> lis(xmlfile.out);
