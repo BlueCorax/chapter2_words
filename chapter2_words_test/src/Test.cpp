@@ -208,6 +208,22 @@ void test_opIN_invalid(){
 }
 
 //kwic tests
+void test_1line_10words(){
+	std::istringstream in{"eis zwoei drueue vier fueuef saechs sibae acht nueuen zaeaeh\n"};
+	std::ostringstream out{};
+	kwic::kwic(in, out);
+	ASSERT_EQUAL( 	"acht nueuen zaeaeh eis zwoei drueue vier fueuef saechs sibae \n"
+					"drueue vier fueuef saechs sibae acht nueuen zaeaeh eis zwoei \n"
+					"eis zwoei drueue vier fueuef saechs sibae acht nueuen zaeaeh \n"
+					"fueuef saechs sibae acht nueuen zaeaeh eis zwoei drueue vier \n"
+					"nueuen zaeaeh eis zwoei drueue vier fueuef saechs sibae acht \n"
+					"saechs sibae acht nueuen zaeaeh eis zwoei drueue vier fueuef \n"
+					"sibae acht nueuen zaeaeh eis zwoei drueue vier fueuef saechs \n"
+					"vier fueuef saechs sibae acht nueuen zaeaeh eis zwoei drueue \n"
+					"zaeaeh eis zwoei drueue vier fueuef saechs sibae acht nueuen \n"
+					"zwoei drueue vier fueuef saechs sibae acht nueuen zaeaeh eis \n", out.str());
+}
+
 void test_2lines_3words(){
 	std::istringstream in{"one two three\n four five six\n"};
 	std::ostringstream out{};
@@ -219,6 +235,7 @@ void test_2lines_3words(){
 					"three one two \n"
 					"two three one \n", out.str());
 }
+
 
 bool runAllTests(int argc, char const *argv[]) {
 	cute::suite s { };
@@ -255,6 +272,7 @@ bool runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_opIN_invalid));
 
 	//kwic tests
+	s.push_back(CUTE(test_1line_10words));
 	s.push_back(CUTE(test_2lines_3words));
 	push_back_AllTests(s);
 	cute::xml_file_opener xmlfile(argc, argv);
